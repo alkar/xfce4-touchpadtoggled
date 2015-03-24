@@ -1,8 +1,9 @@
 /*
- *  xfce4-volumed - Volume management daemon for XFCE 4
+ *  xfce4-touchpadtoggled - Touchpad Toggle management daemon for XFCE 4
  *
  *  Copyright © 2009 Steve Dodier <sidnioulz@gmail.com>
  *  Copyright © 2012 Lionel Le Folgoc <lionel@lefolgoc.net>
+ *  Copyright © 2015 Dimitrios Karagiannis <dhkarag@gmail.com>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,13 +22,13 @@
 #ifndef _XVD_KEYS_H
 #define _XVD_KEYS_H
 
-#include "xvd_data_types.h"
+#include "xttd_data_types.h"
 
 
-void 
-xvd_keys_init(XvdInstance *Inst);
+void
+xttd_keys_init(XttdInstance *Inst);
 
-void 
-xvd_keys_release(XvdInstance *Inst);
+void
+xttd_keys_release(XttdInstance *Inst);
 
 #endif

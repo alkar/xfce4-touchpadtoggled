@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Name=XFCE TouchpadToggle Daemon
+Comment=Daemon that manages the touchpad toggle key and displays status notifications
+Exec=@PACKAGE_EXEC@
+OnlyShowIn=XFCE;

@@ -1,8 +1,9 @@
 /*
- *  xfce4-volumed - Volume management daemon for XFCE 4
+ *  xfce4-touchpadtoggled - Touchpad Toggle management daemon for XFCE 4
  *
  *  Copyright © 2009 Steve Dodier <sidnioulz@gmail.com>
  *  Copyright © 2012 Lionel Le Folgoc <lionel@lefolgoc.net>
+ *  Copyright © 2015 Dimitrios Karagiannis <dhkarag@gmail.com>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,32 +26,21 @@
 #include <config.h>
 #endif
 
-#include "xvd_data_types.h"
+#include "xttd_data_types.h"
 
 
 #define SYNCHRONOUS      "x-canonical-private-synchronous"
 #define LAYOUT_ICON_ONLY "x-canonical-private-icon-only"
 
 
-void 
-xvd_notify_notification(XvdInstance *Inst, 
-						gchar* icon, 
-						gint value);
-
-void 
-xvd_notify_volume_notification(XvdInstance *Inst);
+void
+xttd_toggle_notification(XttdInstance *Inst, int state);
 
 void
-xvd_notify_overshoot_notification(XvdInstance *Inst);
-
-void
-xvd_notify_undershoot_notification(XvdInstance *Inst);
-
-void 
-xvd_notify_init(XvdInstance *Inst, 
+xttd_notify_init(XttdInstance *Inst,
 				const gchar *appname);
 
-void 
-xvd_notify_uninit(XvdInstance *Inst);
+void
+xttd_notify_uninit(XttdInstance *Inst);
 
 #endif

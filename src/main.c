@@ -1,8 +1,9 @@
 /*
- *  xfce4-volumed - Volume management daemon for XFCE 4
+ *  xfce4-touchpadtoggled - Touchpad Toggle management daemon for XFCE 4
  *
  *  Copyright © 2009 Steve Dodier <sidnioulz@gmail.com>
  *  Copyright © 2012 Lionel Le Folgoc <lionel@lefolgoc.net>
+ *  Copyright © 2015 Dimitrios Karagiannis <dhkarag@gmail.com>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,17 +35,11 @@
 
 #include <gtk/gtk.h>
 
-#include "xvd_data_types.h"
-#include "xvd_keys.h"
-#include "xvd_pulse.h"
-#include "xvd_xfconf.h"
+#include "xttd_data_types.h"
+#include "xttd_keys.h"
+#include "xttd_notify.h"
 
-#ifdef HAVE_LIBNOTIFY
-#include "xvd_notify.h"
-#endif
-
-
-static XvdInstance *Inst = NULL;
+static XttdInstance *Inst = NULL;
 
 static gboolean opt_version = FALSE;
 static gboolean opt_no_daemon = FALSE;
@@ -57,7 +52,7 @@ static GOptionEntry option_entries[] =
 
 
 static gint
-xvd_daemonize(void)
+xttd_daemonize(void)
 {
 #ifdef HAVE_DAEMON
 	return daemon (1, 1);
@@ -80,36 +75,21 @@ xvd_daemonize(void)
 #endif
 }
 
-static void 
-xvd_shutdown(void)
+static void
+xttd_shutdown(void)
 {
-	xvd_close_pulse (Inst);
-	
-	#ifdef HAVE_LIBNOTIFY
-	xvd_notify_uninit (Inst);
-	#endif
-	
-	xvd_keys_release (Inst);
-	xvd_xfconf_shutdown (Inst);
-	
-	//TODO xvd_instance_free
+	xttd_notify_uninit (Inst);
+
+	xttd_keys_release (Inst);
 }
 
-static void 
-xvd_instance_init(XvdInstance *i)
+static void
+xttd_instance_init(XttdInstance *i)
 {
-	i->pa_main_loop = NULL;
-	i->pulse_context = NULL;
-	i->sink_index = -1;
-	i->chan = NULL;
-	i->loop = NULL;
-	#ifdef HAVE_LIBNOTIFY
-	i->gauge_notifications = FALSE;
 	i->notification	= NULL;
-	#endif
 }
 
-gint 
+gint
 main(gint argc, gchar **argv)
 {
 	GError         *error = NULL;
@@ -145,13 +125,13 @@ main(gint argc, gchar **argv)
 		return EXIT_SUCCESS;
 	}
 
-	Inst = g_malloc (sizeof (XvdInstance));
-	xvd_instance_init (Inst);
+	Inst = g_malloc (sizeof (XttdInstance));
+	xttd_instance_init (Inst);
 
 	/* daemonize the process */
 	if (!opt_no_daemon)
 	{
-		if (xvd_daemonize () == -1)
+		if (xttd_daemonize () == -1)
 		{
 			/* show message and continue in normal mode */
 			g_warning ("Failed to fork the process: %s. Continuing in non-daemon mode.", g_strerror (errno));
@@ -159,35 +139,17 @@ main(gint argc, gchar **argv)
 	}
 
 	/* Grab the keys */
-	xvd_keys_init (Inst);
+	xttd_keys_init (Inst);
 
-	/* Xfconf init */
-	if (!xvd_xfconf_init (Inst))
-	{
-		xvd_shutdown ();
-		return EXIT_FAILURE;
-	}
-  
-	/* Pulse init */
-	if (!xvd_open_pulse (Inst))
-	{
-		g_warning ("Unable to initialize pulseaudio support, quitting");
-		xvd_shutdown ();
-		return EXIT_FAILURE;
-	}
-	
-	xvd_xfconf_get_vol_step (Inst);
-	
 	/* Libnotify init and idle till ready for the main loop */
-	g_set_application_name (XVD_APPNAME);
-	#ifdef HAVE_LIBNOTIFY
-	xvd_notify_init (Inst, XVD_APPNAME);
-	#endif
-	
+	g_set_application_name (XTTD_APPNAME);
+
+	xttd_notify_init (Inst, XTTD_APPNAME);
+
 	Inst->loop = g_main_loop_new (NULL, FALSE);
 	g_main_loop_run (Inst->loop);
-	
-	xvd_shutdown ();
+
+	xttd_shutdown ();
 	return 0;
 }
 

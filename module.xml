@@ -2,19 +2,17 @@
 <Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
-         xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name xml:lang="en">xfce4-volumed</name>
-  <shortdesc xml:lang="en">Basic daemon enabling the XF86 Volume keys and supporting synchronous volume notifications</shortdesc>
-  <homepage rdf:resource="https://launchpad.net/xfce4-volumed"/>
+  <name xml:lang="en">xfce4-touchpadtoggled</name>
+  <shortdesc xml:lang="en">Basic daemon that manages the XF86 Touchpad Toggle key and displays status notifications</shortdesc>
+  <homepage rdf:resource="https://github.com/alkar/xfce4-touchpadtoggled"/>
   <mailing-list rdf:resource="https://lists.ubuntu.com/mailman/listinfo/xubuntu-devel"/>
 
   <maintainer>
     <foaf:Person>
-      <foaf:name>Steve Dodier</foaf:name>
-      <foaf:mbox>mailto:sidnioulz@gmail.com</foaf:mbox>
-      <gnome:userid>SiDi</gnome:userid>
+      <foaf:name>Dimitrios Karagiannis</foaf:name>
+      <foaf:mbox>mailto:dhkarag@gmail.com</foaf:mbox>
     </foaf:Person>
   </maintainer>
 </Project>

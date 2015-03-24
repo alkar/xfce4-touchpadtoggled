@@ -1,8 +1,7 @@
 /*
- *  xfce4-volumed - Volume management daemon for XFCE 4
+ *  xfce4-touchpadtoggled - Touchpad Toggle management daemon for XFCE 4
  *
- *  Copyright © 2009 Steve Dodier <sidnioulz@gmail.com>
- *  Copyright © 2012 Lionel Le Folgoc <lionel@lefolgoc.net>
+ *  Copyright © 2015 Dimitrios Karagiannis <dhkarag@gmail.com>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,19 +17,17 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _XVD_XFCONF_H
-#define _XVD_XFCONF_H
+#ifndef _XTTD_XINPUT_H
+#define _XTTD_XINPUT_H
 
-#include "xvd_data_types.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "xttd_data_types.h"
 
 
-gboolean
-xvd_xfconf_init(XvdInstance *Inst);
-
-void   
-xvd_xfconf_get_vol_step(XvdInstance *Inst);
-
-void 
-xvd_xfconf_shutdown(XvdInstance *Inst);
+void
+xttd_toggle_device(const char *name, int *state);
 
 #endif

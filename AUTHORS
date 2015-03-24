@@ -3,7 +3,5 @@
 	Steve Dodier <sidnioulz@gmail.com>
  * pulseaudio port
 	Lionel Le Folgoc <lionel@lefolgoc.net>
-
-=== Contributions
- * xvd_mixer.c
- 	Jannis Pohlmann <jannis@xfce.org>
+ * fork into touchpadtoggled
+    Dimitrios Karagiannis <dhkarag@gmail.com>

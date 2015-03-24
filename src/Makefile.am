@@ -6,52 +6,37 @@ INCLUDES = \
 	$(PLATFORM_CPPFLAGS)
 
 bin_PROGRAMS = \
-	xfce4-volumed-pulse
+	xfce4-touchpadtoggled
 
-xfce4_volumed_pulse_SOURCES = \
+xfce4_touchpadtoggled_SOURCES = \
 	main.c \
-	xvd_data_types.h \
-	xvd_keys.c \
-	xvd_keys.h \
-	xvd_pulse.c \
-	xvd_pulse.h \
-	xvd_xfconf.c \
-	xvd_xfconf.h
+	xttd_data_types.h \
+	xttd_keys.c \
+	xttd_keys.h \
+	xttd_xinput.c \
+	xttd_xinput.h \
+	xttd_notify.c \
+	xttd_notify.h
 
-xfce4_volumed_pulse_CFLAGS = \
+xfce4_touchpadtoggled_CFLAGS = \
 	$(GLIB_CFLAGS) \
 	$(GTK_CFLAGS) \
-	$(XFCONF_CFLAGS) \
 	$(LIBKEYBINDER_CFLAGS) \
-	$(LIBPULSE_CFLAGS) \
-	$(LIBPULSEMAINLOOPGLIB_CFLAGS) \
+	$(LIBX11_CFLAGS) \
+	$(LIBXI_CFLAGS) \
+	$(LIBNOTIFY_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
-xfce4_volumed_pulse_LDFLAGS = \
+xfce4_touchpadtoggled_LDFLAGS = \
 	-no-undefined \
 	$(PLATFORM_LDFLAGS)
 
-xfce4_volumed_pulse_LDADD = \
+xfce4_touchpadtoggled_LDADD = \
 	$(GLIB_LIBS) \
 	$(GTK_LIBS) \
-	$(XFCONF_LIBS) \
 	$(LIBKEYBINDER_LIBS) \
-	$(LIBPULSE_LIBS) \
-	$(LIBPULSEMAINLOOPGLIB_LIBS)
-
-#
-# Optional support for libnotify
-#
-if HAVE_LIBNOTIFY
-xfce4_volumed_pulse_SOURCES += \
-	xvd_notify.c \
-	xvd_notify.h
-
-xfce4_volumed_pulse_CFLAGS += \
-	$(LIBNOTIFY_CFLAGS)
-
-xfce4_volumed_pulse_LDADD += \
-	$(LIBNOTIFY_LIBS)
-endif
+	$(LIBNOTIFY_LIBS) \
+	$(LIBX11_LIBS) \
+	$(LIBXI_LIBS)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

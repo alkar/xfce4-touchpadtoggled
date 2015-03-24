@@ -1,6 +1,2 @@
-Thanks to Jannis Pohlmann for his extraordinary help. This daemon has mostly
-been designed by him.
-
-Thanks to Lionel Le Folgoc for the packaging and autotools help.
-
-Thanks to the XFCE developers for their advice and feedback.
+Thanks to the xfce4-volumed-pulse developers. This project reuses a large amount
+of their code.

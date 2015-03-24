@@ -1,8 +1,9 @@
 /*
- *  xfce4-volumed - Volume management daemon for XFCE 4
+ *  xfce4-touchpadtoggled - Touchpad Toggle management daemon for XFCE 4
  *
  *  Copyright © 2009 Steve Dodier <sidnioulz@gmail.com>
  *  Copyright © 2012 Lionel Le Folgoc <lionel@lefolgoc.net>
+ *  Copyright © 2015 Dimitrios Karagiannis <dhkarag@gmail.com>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,50 +27,20 @@
 #endif
 
 #include <glib.h>
-
-#include <xfconf/xfconf.h>
-
-#include <pulse/glib-mainloop.h>
-#include <pulse/context.h>
-#include <pulse/volume.h>
-
-#ifdef HAVE_LIBNOTIFY
 #include <libnotify/notification.h>
-#endif
 
-#define XFCONF_MIXER_CHANNEL_NAME "xfce4-mixer"
-#define XFCONF_MIXER_VOL_STEP "/volume-step-size"
-#define VOL_STEP_DEFAULT_VAL 5
+#define TOUCHPAD_NAME "SynPS/2 Synaptics TouchPad"
 
-#define XVD_APPNAME "Xfce volume daemon"
-
-
-typedef enum _XvdVolStepDirection
-{
-  XVD_UP,
-  XVD_DOWN
-} XvdVolStepDirection;
+#define XTTD_APPNAME "Xfce touchpad toggle daemon"
 
 typedef struct {
-	/* PA data */
-	pa_glib_mainloop *pa_main_loop;
-	pa_context       *pulse_context;
-	guint32           sink_index;
-	pa_cvolume        volume;
 	int               mute;
-	
-	/* Xfconf vars */
-	XfconfChannel		*chan;
-	guint				vol_step;
-  
-  #ifdef HAVE_LIBNOTIFY
-    /* Libnotify vars */
-	gboolean			gauge_notifications;
-	NotifyNotification* notification;
-	#endif
 
-	/* Other Xvd vars */
+    /* Libnotify vars */
+	NotifyNotification* notification;
+
+	/* Other Xttd vars */
 	GMainLoop			*loop;
-} XvdInstance;
+} XttdInstance;
 
 #endif
